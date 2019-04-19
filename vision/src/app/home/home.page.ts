@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
+import * as config from 'config.json';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,8 @@ export class HomePage {
         console.log(err)
         console.log('ripppppp :(')
       });
+
+    console.log((<any>config).project_id)
   }
 
   // camera options (Size and location). In the following example, the preview uses the rear camera and display the preview in the back of the webview
@@ -37,12 +40,11 @@ export class HomePage {
     alpha: 1
   }
 
-
   // picture options
   pictureOpts: CameraPreviewPictureOptions = {
     width: 1280,
     height: 1280,
-    quality: 85
+    quality: 85,
   }
 
   // placeholder for photo

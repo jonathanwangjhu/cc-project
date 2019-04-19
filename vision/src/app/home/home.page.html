@@ -4,7 +4,7 @@
 		<div class="cameraWaitText">Please wait, the camera is starting!</div>
 	</div>
 	<div *ngIf="cameraStarted">
-		<ion-button (click)="takePicture()" >take photo!</ion-button>
-		<img src="{{picture}}">
+		<img class="image" src="{{picture}}">
+		<ion-button class="takePhotoButton" (click)="takePicture()" >take photo!</ion-button>
 	</div>
 </ion-content>

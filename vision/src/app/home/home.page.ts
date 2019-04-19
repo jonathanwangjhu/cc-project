@@ -31,8 +31,8 @@ export class HomePage {
     width: window.screen.width,
     height: window.screen.height,
     camera: 'rear',
-    tapPhoto: true,
-    previewDrag: true,
+    tapPhoto: false,
+    previewDrag: false,
     toBack: true,
     alpha: 1
   }

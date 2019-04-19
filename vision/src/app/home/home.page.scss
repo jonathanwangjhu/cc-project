@@ -10,3 +10,16 @@ html, body, ion-app, ion-content, ion-page, .nav-decor {
     padding: 5%;
     text-align: center;
 }
+
+.takePhotoButton {
+    bottom: 25px;
+    left: 25px;
+    position: fixed;
+}
+
+.image {
+    bottom: 65px;
+    left: 25px;
+    position: fixed;
+    width: 135px;
+}

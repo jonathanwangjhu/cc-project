@@ -5,29 +5,32 @@ import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 // Cloud Vision
-import * as vision from '@google-cloud/vision';
+var vision = require('@google-cloud/vision');
 const visionClient =  new vision.ImageAnnotatorClient();
 
 // Dedicated bucket for cloud function invocation
 const bucketName = 'cloud-computing-235700-vision';
 
 export const imageTagger = functions.storage
-    .bucket(bucketName)
-    .object()
-    .onChange(async event => {
-            const object = event.data;
-            const filePath = object.name;   
+	.bucket(bucketName)
+	.object()
+	.onFinalize(async (object, context) => {
+		const filePath = object.name;   
 
-            // Location of saved file in bucket
-            const imageUri = `gs://${bucketName}/${filePath}`;
+		// Location of saved file in bucket
+		const imageUri = `gs://${bucketName}/${filePath}`;
 
-            const docId = filePath.split('.jpg')[0];
+		if(filePath) {
+			const docId = filePath.split('.jpg')[0];
 
-            const docRef  = admin.firestore().collection('photos').doc(docId);
+			const docRef  = admin.firestore().collection('photos').doc(docId);
 
-            // Await the cloud vision response
-            const results = await visionClient.faceDetection(imageUri);
-            const faces = results.faceAnnotations;
+			// Await the cloud vision response
+			const results = await visionClient.faceDetection(imageUri);
+			const faces = results.faceAnnotations;
 
-            return docRef.set(faces)           
+			return docRef.set(faces)   
+		} else {
+			return;
+		}        
 });

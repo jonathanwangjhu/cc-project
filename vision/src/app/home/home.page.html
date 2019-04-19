@@ -1,16 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-title>
+			Ionic Blank
+		</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-button (click)="takePicture()" >take photo!</ion-button>
-<img src="{{picture}}">
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+	<div class="cameraWait" *ngIf="!cameraStarted">
+		<ion-progress-bar class="cameraWaitBar" type="indeterminate"></ion-progress-bar>
+		<div class="cameraWaitText">Please wait, the camera is starting!</div>
+	</div>
+	<div *ngIf="cameraStarted">
+		<ion-button (click)="takePicture()" >take photo!</ion-button>
+		<img src="{{picture}}">
+	</div>
 </ion-content>

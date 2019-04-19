@@ -27,6 +27,25 @@ export class HomePage {
     console.log((<any>config).project_id)
   }
 
+  /*async gcpRequest(fileName : String) {
+  	// Imports the Google Cloud client library
+	const vision = require('@google-cloud/vision');
+
+	// Creates a client
+	const client = new vision.ImageAnnotatorClient();
+
+	const [result] = await client.faceDetection(fileName);
+	const faces = result.faceAnnotations;
+	console.log('Faces:');
+	faces.forEach((face, i) => {
+	  console.log(`  Face #${i + 1}:`);
+	  console.log(`    Joy: ${face.joyLikelihood}`);
+	  console.log(`    Anger: ${face.angerLikelihood}`);
+	  console.log(`    Sorrow: ${face.sorrowLikelihood}`);
+	  console.log(`    Surprise: ${face.surpriseLikelihood}`);
+	});
+  }*/
+
   // camera options (Size and location). In the following example, the preview uses the rear camera and display the preview in the back of the webview
   cameraPreviewOpts: CameraPreviewOptions = {
     x: 0,
@@ -42,9 +61,9 @@ export class HomePage {
 
   // picture options
   pictureOpts: CameraPreviewPictureOptions = {
-    width: 1280,
-    height: 1280,
-    quality: 85,
+    width: 1080,
+    height: 1920,
+    quality: 100
   }
 
   // placeholder for photo
@@ -54,6 +73,7 @@ export class HomePage {
   takePicture() {
     this.cameraPreview.takePicture(this.pictureOpts).then((imageData) => {
       this.picture = 'data:image/jpeg;base64,' + imageData;
+      //this.gcpRequest(this.picture);
     }, (err) => {
       console.log(err);
       this.picture = 'assets/img/test.jpg';

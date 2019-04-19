@@ -29,4 +29,4 @@ def detect_emotions(path):
 
         print('face bounds: {}'.format(','.join(vertices)))
 
-detect_emotions("stockphoto.jpg")
+detect_emotions("different_emotions.jpeg")

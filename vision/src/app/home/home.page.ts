@@ -16,6 +16,18 @@ export class HomePage {
       // });
     }
 
+    ionViewDidEnter() {
+    	this.cameraPreview.startCamera(this.cameraPreviewOpts).then(
+        (res) => {
+          console.log(res)
+          console.log("started!!!")
+        },
+        (err) => {
+          console.log(err)
+          console.log('ripppppp :(')
+        });
+    }
+
     // camera options (Size and location). In the following example, the preview uses the rear camera and display the preview in the back of the webview
     cameraPreviewOpts: CameraPreviewOptions = {
       x: 0,
@@ -27,19 +39,6 @@ export class HomePage {
       previewDrag: true,
       toBack: true,
       alpha: 1
-    }
-
-    // start camera
-    startCamera() {
-      this.cameraPreview.startCamera(this.cameraPreviewOpts).then(
-        (res) => {
-          console.log(res)
-          console.log("started!!!")
-        },
-        (err) => {
-          console.log(err)
-          console.log('ripppppp :(')
-        });
     }
 
 

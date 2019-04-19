@@ -1,0 +1,8 @@
+{
+  "name": "vision",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "db468eed"
+}

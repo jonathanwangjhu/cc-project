@@ -1,5 +1,17 @@
 .cameraWait {
-    padding: 50% 10%;
+    background-color: white;
+    border-radius: 10px;
+    padding-top: 10px;
+    height: 10%;
+    width: 80%;
+    position: fixed;
+    top: 30%;
+    margin: 10%;
+}
+
+.cameraWait .cameraWaitBar {
+    width: 90%;
+    margin: 0% 5%;
 }
 
 .cameraWait .cameraWaitText {

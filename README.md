@@ -28,8 +28,10 @@ Setup adapted from [google](https://cloud.google.com/vision/docs/libraries).
 ## Setup for Checkpoint 2
 * make sure you have `npm` installed on your computer and XCode.
 * `npm install -g ionic`
-
 * To compile our app and get it ready to deploy onto an iOS device, clone our repo and `cd` into the 'vision' directory. 
+* `npm i` again to install the modules that our app will need.
 * Open XCode, and click on 'Open', and open the directory ios in vision > platforms. 
 * Then, enter `ionic cordova prepare ios`
 * Once it's done compiling, select your iOS device next to the play button on the top left, and then press play. 
+
+If you are trying to run on Android, you can try `ionic cordova prepare android` but we have not tested our app on Android, as we only have iOS devices.

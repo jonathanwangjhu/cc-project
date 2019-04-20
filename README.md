@@ -1,7 +1,7 @@
 # cc-project
 
 
-## Setup
+## Setup for Checkpoint 1
 
 * make sure you have `pip` installed on your computer and the most recent version of `setuptools` (`pip install --upgrade setuptools`)
 * `pip install --upgrade google-cloud-vision`
@@ -24,3 +24,15 @@ Provide authentication credentials to your application code by setting the envir
 * Run scripts `face_detection` with `python face_detection` and `emotion_detection` with `python emotion_detection` to see if your setup is working correctly.
 
 Setup adapted from [google](https://cloud.google.com/vision/docs/libraries).
+
+## Setup for Checkpoint 2
+* make sure you have `npm` installed on your computer and XCode.
+* `npm install -g ionic`
+* To compile our app and get it ready to deploy onto an iOS device, clone our repo and `cd` into the 'vision' directory. 
+* `npm i` again to install the modules that our app will need.
+* Open XCode, and click on 'Open', and open the directory ios in vision > platforms. 
+* Then, enter `ionic cordova prepare ios`
+* Once it's done compiling, make sure you have a development team set, and enable automatic signing. 
+* Select your iOS device next to the play button on the top left, and then press play to install and run on your iOS device. 
+
+If you are trying to run on Android, you can try `ionic cordova prepare android` but we have not tested our app on Android, as we only have iOS devices.

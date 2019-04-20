@@ -32,6 +32,7 @@ Setup adapted from [google](https://cloud.google.com/vision/docs/libraries).
 * `npm i` again to install the modules that our app will need.
 * Open XCode, and click on 'Open', and open the directory ios in vision > platforms. 
 * Then, enter `ionic cordova prepare ios`
-* Once it's done compiling, select your iOS device next to the play button on the top left, and then press play. 
+* Once it's done compiling, make sure you have a development team set, and enable automatic signing. 
+* Select your iOS device next to the play button on the top left, and then press play to install and run on your iOS device. 
 
 If you are trying to run on Android, you can try `ionic cordova prepare android` but we have not tested our app on Android, as we only have iOS devices.

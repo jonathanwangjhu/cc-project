@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
+import { filter } from 'rxjs/operators';
+
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFirestore} from 'angularfire2/firestore';
+
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview/ngx';
-import * as config from 'config.json';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +14,17 @@ import * as config from 'config.json';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(private cameraPreview: CameraPreview) { }
+  // has the camera finished starting up
   cameraStarted = false
+  // Upload task
+  task: AngularFireUploadTask;
+  // Firestore data
+  firebaseResult: Observable<any>;
+  image: string;
+
+  constructor(private storage: AngularFireStorage, 
+              private afs: AngularFirestore, 
+              private cameraPreview: CameraPreview) { }
 
   ionViewDidEnter() {
     this.cameraPreview.startCamera(this.cameraPreviewOpts).then(
@@ -23,8 +38,6 @@ export class HomePage {
         console.log(err)
         console.log('ripppppp :(')
       });
-
-    console.log((<any>config).project_id)
   }
 
   /*async gcpRequest(fileName : String) {
@@ -45,6 +58,21 @@ export class HomePage {
 	  console.log(`    Surprise: ${face.surpriseLikelihood}`);
 	});
   }*/
+
+  startUpload(file: string) {
+    // const timestamp = new Date().getTime().toString();
+    const docId = this.afs.createId();
+    const path = `${docId}.jpg`;
+
+    // Make a reference to the future location of the firestore document
+    const photoRef = this.afs.collection('photos').doc(docId)
+    
+    // Firestore observable, ignore when return is null
+    this.firebaseResult = photoRef.valueChanges().pipe(filter(data => !!data));
+
+    this.image = 'data:image/jpg;base64,' + file;
+    this.task = this.storage.ref(path).putString(this.image, 'data_url'); 
+  }
 
   // camera options (Size and location). In the following example, the preview uses the rear camera and display the preview in the back of the webview
   cameraPreviewOpts: CameraPreviewOptions = {
@@ -73,7 +101,7 @@ export class HomePage {
   takePicture() {
     this.cameraPreview.takePicture(this.pictureOpts).then((imageData) => {
       this.picture = 'data:image/jpeg;base64,' + imageData;
-      //this.gcpRequest(this.picture);
+      this.startUpload(imageData);
     }, (err) => {
       console.log(err);
       this.picture = 'assets/img/test.jpg';

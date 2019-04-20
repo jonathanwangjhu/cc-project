@@ -4,6 +4,9 @@
 		<div class="cameraWaitText">Please wait, the camera is starting!</div>
 	</div>
 	<div *ngIf="cameraStarted">
+		<div class="firebaseResult" *ngIf="firebaseResult$ | async as result">
+			{{result}}
+		</div>
 		<img class="image" src="{{picture}}">
 		<ion-button class="takePhotoButton" (click)="takePicture()" >take photo!</ion-button>
 	</div>

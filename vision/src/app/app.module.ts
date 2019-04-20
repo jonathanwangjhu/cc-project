@@ -20,7 +20,7 @@ const firebaseConfig = {
   authDomain: "cloud-computing-235700.firebaseapp.com",
   databaseURL: "https://cloud-computing-235700.firebaseio.com",
   projectId: "cloud-computing-235700",
-  storageBucket: "cloud-computing-235700.appspot.com",
+  storageBucket: "cloud-computing-235700-vision.appspot.com",
   messagingSenderId: "830417182994"
 }
 

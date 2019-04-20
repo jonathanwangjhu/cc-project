@@ -5,7 +5,7 @@ import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 // Cloud Vision
-var vision = require('@google-cloud/vision');
+const vision = require('@google-cloud/vision');
 const visionClient =  new vision.ImageAnnotatorClient();
 
 // Dedicated bucket for cloud function invocation
@@ -27,10 +27,29 @@ export const imageTagger = functions.storage
 
 			// Await the cloud vision response
 			const results = await visionClient.faceDetection(imageUri);
-			const faces = results.faceAnnotations;
+			const rewFaces = results[0].faceAnnotations;
+			let faces: {[k: string]: any} = {};
 
+			rewFaces.forEach((face: any, i: number) => {
+				const newFace = {
+					"face": i + 1,
+					"joy": face.joyLikelihood,
+					"anger": face.angerLikelihood,
+					"sorrow": face.sorrowLikelihood,
+					"surprise": face.surpriseLikelihood,
+					"v1": face.boundingPoly.vertices[0],
+					"v2": face.boundingPoly.vertices[1],
+					"v3": face.boundingPoly.vertices[2],
+					"v4": face.boundingPoly.vertices[3]
+				}
+
+				faces[i] = newFace
+			});
+
+			console.log(faces)
 			return docRef.set(faces)   
 		} else {
+			console.log("error!")
 			return;
 		}        
 });

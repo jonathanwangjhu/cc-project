@@ -4,10 +4,22 @@
 		<div class="cameraWaitText">Please wait, the camera is starting!</div>
 	</div>
 	<div *ngIf="cameraStarted">
-		<div class="firebaseResult" *ngIf="firebaseResult$ | async as result">
-			{{result}}
+		<div *ngIf="firebaseResult | async as result">
+			<div *ngFor="let face of result.faces; let i = index">
+				<div class="emotionImage" *ngIf="face == 'anger'" [ngStyle]="{'left': emotionPositions[i][0], 'top': emotionPositions[i][1]}" [style.left]="emotionPositions[i][0]" [style.top]="emotionPositions[i][1]">
+					<img src="./../../assets/images/anger.png">
+				</div>
+				<div class="emotionImage" *ngIf="face == 'joy'" [ngStyle]="{'left': emotionPositions[i][0], 'top': emotionPositions[i][1]}" [style.left]="emotionPositions[i][0]" [style.top]="emotionPositions[i][1]">
+					<img src="./../../assets/images/joy.png">
+				</div>
+				<div class="emotionImage" *ngIf="face == 'sorrow'" [ngStyle]="{'left': emotionPositions[i][0], 'top': emotionPositions[i][1]}" [style.left]="emotionPositions[i][0]" [style.top]="emotionPositions[i][1]">
+					<img src="./../../assets/images/sorrow.png">
+				</div>
+				<div class="emotionImage" *ngIf="face == 'surprise'" [ngStyle]="{'left': emotionPositions[i][0], 'top': emotionPositions[i][1]}" [style.left]="emotionPositions[i][0]" [style.top]="emotionPositions[i][1]">
+					<img src="./../../assets/images/surprise.png">
+				</div>
+			</div>
 		</div>
-		<img class="image" src="{{picture}}">
 		<ion-button class="takePhotoButton" (click)="takePicture()" >take photo!</ion-button>
 	</div>
 </ion-content>
